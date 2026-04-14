@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Blood Donation Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+        header {
+            background-color: #d9534f;
+            color: white;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .main-content {
+            padding: 20px;
+            background-color: white;
+            margin: 20px 0;
+            display: inline-block;
+        }
+        footer {
+            background-color: #d9534f;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #d9534f;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #c9302c;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Blood Donation</h1>
+        <div class="nav-buttons">
+            <a href="registration.html" class="button">Register</a>
+            <a href="contact.html" class="button">Contact Us</a>
+            <a href="about.html" class="button">About Us</a>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="main-content">
+            <h2>Donate Blood, Save Lives</h2>
+            <p>Join us in our mission to save lives through blood donation. Register today and make a difference!</p>
+            <a href="looking-for-blood.html" class="button">Looking for Blood</a>
+            <a href="donate-blood.html" class="button">Want to Donate Blood</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Blood Donation Organization. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
