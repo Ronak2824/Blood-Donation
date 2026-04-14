@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Blood Donation Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+        header {
+            background-color: #d9534f;
+            color: white;
+            padding: 10px 0;
+            position: relative;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        .main-content {
+            padding: 20px;
+            background-color: white;
+            margin: 20px 0;
+            display: inline-block;
+        }
+        footer {
+            background-color: #d9534f;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #d9534f;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #c9302c;
+        }
+        .statistics {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            background-color: #f1f1f1;
+            padding: 20px;
+        }
+        .stat {
+            background-color: #d9534f;
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            font-size: 24px;
+            width: 30%;
+        }
+        .stat h3 {
+            font-size: 28px;
+        }
+        .cta-countdown {
+            margin: 20px 0;
+            background-color: #ffcc00;
+            color: #333;
+            padding: 20px;
+            font-size: 24px;
+        }
+        #countdown {
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .faq {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #fff;
+        }
+        .faq h2 {
+            color: #d9534f;
+        }
+        .logo-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        .logo {
+            width: 100px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="NEW HOME.html">
+                <img src="logo.png" alt="BloodBridge Logo" class="logo">
+            </a>
+        </div>
+        <div class="container">
+            <h1>Welcome to Blood Donation</h1>
+        </div>
+    </header>
+    <div class="container">
+        <div class="main-content">
+            <h2>Donate Blood, Save Lives</h2>
+            <p>Join us in our mission to save lives through blood donation. Register today and make a difference!</p>
+            <a href="registration.html" class="button">Register</a>
+            <a href="contact.html" class="button">Contact Us</a>
+            <a href="about 2.html" class="button">About Us</a>
+
+            
+
+        </div>
+
+        <!-- Statistics Section -->
+        <div class="statistics">
+            <div class="stat">
+                <h3>2000+</h3>
+                <p>Lives Saved</p>
+            </div>
+            <div class="stat">
+                <h3>50+</h3>
+                <p>Donation Centers</p>
+            </div>
+            <div class="stat">
+                <h3>300+</h3>
+                <p>Volunteers</p>
+            </div>
+        </div>
+
+        <!-- Call to Action Section with Countdown Timer -->
+        <div class="cta-countdown">
+            <p>Next Blood Donation Drive starts in:</p>
+            <p id="countdown"></p>
+        </div>
+
+        <!-- Frequently Asked Questions Section -->
+        <div class="faq">
+            <h2>Frequently Asked Questions</h2>
+            <div>
+                <p><strong>1. Who can donate blood?</strong></p>
+                <p>Generally, people between the ages of 18 and 65 who are in good health and weigh at least 50kg can donate blood. However, please consult a healthcare provider for individual eligibility.</p>
+            </div>
+            <div>
+                <p><strong>2. How often can I donate blood?</strong></p>
+                <p>You can donate whole blood once every 56 days. Other types of blood donations (like platelets) may have different eligibility criteria.</p>
+            </div>
+            <div>
+                <p><strong>3. What happens to my blood after donation?</strong></p>
+                <p>Your donated blood is tested, processed, and separated into components (such as red cells, plasma, and platelets). These are then given to patients in need of them.</p>
+            </div>
+        </div>
+
+        <!-- Emergency Contact Form -->
+        <div class="map">
+            <h3>Emergency Blood Request</h3>
+            <p>If you need urgnt blood, pleease fill out the emergency contact form:</p>
+            <a href="emergency.html" class="button">Request Emergency Blood</a>
+        </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Blood Donation Organization. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

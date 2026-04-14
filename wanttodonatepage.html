@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="bloodBridge">
+<head>
+    <title>Blood Donation Website</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #d9534f;
+            --primary-dark: #c9302c;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 0;
+            position: relative;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .main-content {
+            padding: 20px;
+            background-color: white;
+            margin: 20px 0;
+            display: inline-block;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .option-box {
+            background-color: #fff;
+            border: 2px solid var(--primary-color);
+            border-radius: 5px;
+            width: 30%;
+            min-width: 250px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .option-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .option-box h3 {
+            color: var(--primary-color);
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .option-box p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .logo-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .logo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .options {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .option-box {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body ng-controller="DonationController">
+    <header>
+        <div class="logo-container">
+            <a href="NEW HOME.html">
+                <img src="logo.png" alt="BloodBridge Logo" class="logo">
+            </a>
+        </div>
+        <div class="container">
+            <h1>Welcome to Blood Donation</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-content">
+            <h2>Choose an Option to Get Started</h2>
+            <p>Select one of the following options to learn more about blood donation or to take action.</p>
+        </div>
+
+        <div class="options">
+            <div class="option-box" ng-repeat="option in options">
+                <h3>{{option.title}}</h3>
+                <p>{{option.description}}</p>
+                <a href="{{option.link}}" class="button">{{option.buttonText}}</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Blood Donation Organization. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        angular.module('bloodBridge', [])
+            .controller('DonationController', ['$scope', function($scope) {
+                // Static options data
+                $scope.options = [
+                    {
+                        title: 'Blood Donation Camp',
+                        description: 'Find the nearest blood donation camp and participate in our upcoming donation drives.',
+                        link: 'blooddonationcamp.html',
+                        buttonText: 'Learn More'
+                    },
+                    {
+                        title: 'Donor Login',
+                        description: 'Log in to track your donation history, update your profile, and receive updates on donation camps.',
+                        link: 'donor_login.html',
+                        buttonText: 'Login'
+                    },
+                    {
+                        title: 'About Blood Donation',
+                        description: 'Learn more about the importance of blood donation, how it helps save lives, and how you can make a difference.',
+                        link: 'advantages.html',
+                        buttonText: 'Learn More'
+                    }
+                ];
+            }]);
+    </script>
+</body>
+</html>

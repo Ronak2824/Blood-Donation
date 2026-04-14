@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="bloodDonationApp">
+<head>
+    <title>Dashboard - BloodBridge</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+        header {
+            background-color: #d9534f;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .logo-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .logo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .logo:hover {
+            transform: scale(1.1);
+        }
+        .container {
+            width: 60%;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            margin-top: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .info, .achievements, .leaderboard, .tips {
+            font-size: 20px;
+            margin: 15px 0;
+            color: #333;
+        }
+        .countdown {
+            font-size: 24px;
+            color: #d9534f;
+            font-weight: bold;
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .progress-bar {
+            width: 100%;
+            background: #ddd;
+            border-radius: 8px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 15px;
+            background: #d9534f;
+            width: 0%;
+            transition: width 0.5s;
+        }
+    </style>
+</head>
+<body ng-controller="DashboardController">
+    <header>
+        <a href="NEW HOME.html">
+            <div class="logo-container">
+                <img src="logo.png" alt="BloodBridge Logo" class="logo">
+            </div>
+        </a>
+        <h1>Dashboard</h1>
+    </header>
+    
+    <div class="container">
+        <h2 style="color: #d9534f;">Blood Donation Details</h2>
+        <h3 id="greeting"></h3>
+        <p class="info">🩸 Last Donation Date: <strong>{{ lastDonationDate | date:'MMMM d, yyyy' }}</strong></p>
+        <p class="info">📅 Next Eligible Donation Date: <strong>{{ nextDonationDate | date:'MMMM d, yyyy' }}</strong></p>
+        <p class="countdown">⏳ Time Left to Donate Again: <strong>{{ countdown }}</strong></p>
+        <div class="progress-bar">
+            <div class="progress" ng-style="{width: progress + '%'}"></div>
+        </div>
+        <h3 class="achievements">🏅 Donations Made: <strong>{{ donationsMade }}</strong></h3>
+        <h3 class="info">💡 Blood Donation Fact: <span id="fact"></span></h3>
+        <h3 class="leaderboard">🏆 Top Donors Leaderboard</h3>
+        <ul>
+            <li>1. Alex - 10 Donations</li>
+            <li>2. Jamie - 8 Donations</li>
+            <li>3. Morgan - 7 Donations</li>
+        </ul>
+        <h3 class="tips">🩸 Health Tips for Donors</h3>
+        <p>✅ Stay hydrated before donation.</p>
+        <p>✅ Eat iron-rich foods like spinach and meat.</p>
+        <p>✅ Get plenty of rest the night before.</p>
+    </div>
+
+    <script>
+        alert("Your request has been registered.");
+
+        var app = angular.module('bloodDonationApp', []);
+        app.controller('DashboardController', function($scope, $interval) {
+            $scope.lastDonationDate = new Date('2025-04-04');
+            var nextDate = new Date($scope.lastDonationDate);
+            nextDate.setDate(nextDate.getDate() + 56);
+            $scope.nextDonationDate = nextDate;
+            $scope.donationsMade = 5;
+            
+            function updateCountdown() {
+                var now = new Date();
+                var timeDiff = nextDate - now;
+                if (timeDiff <= 0) {
+                    $scope.countdown = "🎉 You are eligible to donate now!";
+                    $scope.progress = 100;
+                } else {
+                    var days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                    var elapsedDays = 56 - days;
+                    $scope.progress = (elapsedDays / 56) * 100;
+                    var hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                    $scope.countdown = days + " days, " + hours + " hours, " + minutes + " minutes left";
+                }
+            }
+            updateCountdown();
+            $interval(updateCountdown, 60000);
+        });
+
+        var facts = [
+            "One donation can save up to three lives!",
+            "Blood donation burns around 650 calories per pint donated.",
+            "You can donate whole blood every 56 days.",
+            "Type O-negative is the universal donor.",
+            "Plasma donation can help treat burn victims."
+        ];
+        
+        function changeFact() {
+            document.getElementById("fact").innerText = facts[Math.floor(Math.random() * facts.length)];
+        }
+        setInterval(changeFact, 5000);
+        changeFact();
+        
+        function setGreeting() {
+            var hour = new Date().getHours();
+            var greeting;
+            if (hour < 12) {
+                greeting = "Good Morning!";
+            } else if (hour < 18) {
+                greeting = "Good Afternoon!";
+            } else {
+                greeting = "Good Evening!";
+            }
+            document.getElementById("greeting").innerText = greeting;
+        }
+        setGreeting();
+    </script>
+</body>
+</html>

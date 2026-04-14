@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Login - BloodBridge</title>
+    <style>
+        :root {
+            --primary-color: #d9534f;
+            --primary-dark: #c9302c;
+            --secondary-color: #5cb85c;
+            --text-color: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+            background-image: url('https://images.unsplash.com/photo-1536856136534-bb679c52a9aa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(217, 83, 79, 0.95), rgba(201, 48, 44, 0.95));
+            z-index: 1;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2.5rem;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            animation: slideUp 0.5s ease;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.8rem;
+            color: var(--text-color);
+        }
+
+        input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(217, 83, 79, 0.1);
+        }
+
+        .btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .error-message {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Donor Login</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="donorId">Donor ID</label>
+                <input type="text" id="donorId" placeholder="Enter your Donor ID">
+                <div class="error-message" id="donorIdError">Donor ID is required.</div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password">
+                <div class="error-message" id="passwordError">Password is required.</div>
+            </div>
+            <div class="forgot-password">
+                <a href="#" onclick="forgotPassword()">Forgot Password?</a>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <div class="error-message" id="loginError">Invalid Donor ID or Password.</div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get input values
+            let donorId = document.getElementById("donorId").value.trim();
+            let password = document.getElementById("password").value.trim();
+
+            // Error message elements
+            let donorIdError = document.getElementById("donorIdError");
+            let passwordError = document.getElementById("passwordError");
+            let loginError = document.getElementById("loginError");
+
+            // Reset error messages
+            donorIdError.style.display = "none";
+            passwordError.style.display = "none";
+            loginError.style.display = "none";
+
+            let isValid = true;
+
+            // Check for empty fields
+            if (donorId === "") {
+                donorIdError.style.display = "block";
+                isValid = false;
+            }
+            if (password === "") {
+                passwordError.style.display = "block";
+                isValid = false;
+            }
+
+            if (!isValid) return; // Stop execution if fields are empty
+
+            // Dummy authentication check
+            if (donorId === "demo" && password === "demo123") {
+                window.location.href = "profile.html";
+            } else {
+                loginError.style.display = "block";
+            }
+        });
+
+        function forgotPassword() {
+            alert("Please contact the administrator to reset your password.");
+        }
+    </script>
+
+</body>
+</html>

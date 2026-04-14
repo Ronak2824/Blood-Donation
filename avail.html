@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Stock Availability</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #d9534f;
+            --primary-dark: #c9302c;
+            --secondary-color: #f8f9fa;
+            --text-color: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding-bottom: 60px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .logo-container {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .logo {
+            height: 50px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 2rem auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .search-box {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        select {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            font-size: 1rem;
+            min-width: 200px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        select:hover, select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        button {
+            padding: 0.8rem 2rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .blood-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .blood-type {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .blood-type:hover {
+            transform: translateY(-5px);
+        }
+
+        .blood-type i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 1rem;
+            }
+
+            .search-box {
+                padding: 1rem;
+            }
+
+            select {
+                width: 100%;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="NEW HOME.html">
+                <img src="logo.png" alt="BloodBridge Logo" class="logo">
+            </a>
+        </div>
+        <h1>Blood Stock Availability</h1>
+    </header>
+    
+    <div class="container">
+        <div class="search-box">
+            <select id="state" onchange="loadDistricts()">
+                <option value="">Select State</option>
+            </select>
+            <select id="district">
+                <option value="">Select District</option>
+            </select>
+            <select id="bloodGroup">
+                <option value="">All Blood Groups</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+            </select>
+            <button onclick="searchBloodStock()">
+                <i class="fas fa-search"></i> Search
+            </button>
+        </div>
+
+        <div class="blood-types">
+            <div class="blood-type">
+                <i class="fas fa-tint"></i>
+                <h3>A+</h3>
+                <p>Can receive from: A+, A-, O+, O-</p>
+            </div>
+            <div class="blood-type">
+                <i class="fas fa-tint"></i>
+                <h3>O-</h3>
+                <p>Universal Donor</p>
+            </div>
+            <div class="blood-type">
+                <i class="fas fa-tint"></i>
+                <h3>AB+</h3>
+                <p>Universal Recipient</p>
+            </div>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Blood Group</th>
+                    <th>Availability</th>
+                    <th>Last Updated</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody id="resultsTable">
+                <tr>
+                    <td colspan="4" style="text-align: center;">Select location to view availability</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 BloodBridge Organization. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const stateDropdown = document.getElementById("state");
+        const districtDropdown = document.getElementById("district");
+
+        const stateDistrictMap = {
+            "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur", "Nellore"],
+            "Arunachal Pradesh": ["Itanagar", "Naharlagun", "Tawang"],
+            "Assam": ["Guwahati", "Jorhat", "Dibrugarh"],
+            "Bihar": ["Patna", "Gaya", "Muzaffarpur"],
+            "Chhattisgarh": ["Raipur", "Bilaspur", "Durg"],
+            "Delhi": ["Central Delhi", "North Delhi", "South Delhi"],
+            "Goa": ["Panaji", "Margao", "Vasco da Gama"],
+            "Gujarat": ["Ahmedabad", "Surat", "Vadodara"],
+            "Haryana": ["Gurgaon", "Faridabad", "Panipat"],
+            "Himachal Pradesh": ["Shimla", "Manali", "Dharamshala"],
+            "Jharkhand": ["Ranchi", "Jamshedpur", "Dhanbad"],
+            "Karnataka": ["Bangalore", "Mysore", "Mangalore"],
+            "Kerala": ["Thiruvananthapuram", "Kochi", "Kozhikode"],
+            "Madhya Pradesh": ["Bhopal", "Indore", "Jabalpur"],
+            "Maharashtra": ["Mumbai", "Pune", "Nagpur"],
+            "Manipur": ["Imphal", "Thoubal", "Bishnupur"],
+            "Meghalaya": ["Shillong", "Tura", "Jowai"],
+            "Mizoram": ["Aizawl", "Lunglei", "Champhai"],
+            "Nagaland": ["Kohima", "Dimapur", "Mokokchung"],
+            "Odisha": ["Bhubaneswar", "Cuttack", "Rourkela"],
+            "Punjab": ["Ludhiana", "Amritsar", "Jalandhar"],
+            "Rajasthan": ["Jaipur", "Udaipur", "Jodhpur"],
+            "Sikkim": ["Gangtok", "Namchi", "Pelling"],
+            "Tamil Nadu": ["Chennai", "Madurai", "Coimbatore"],
+            "Telangana": ["Hyderabad", "Warangal", "Nizamabad"],
+            "Tripura": ["Agartala", "Udaipur", "Dharmanagar"],
+            "Uttar Pradesh": ["Lucknow", "Kanpur", "Varanasi"],
+            "Uttarakhand": ["Dehradun", "Haridwar", "Nainital"],
+            "West Bengal": ["Kolkata", "Howrah", "Durgapur"]
+        };
+
+        function loadStates() {
+            for (let state in stateDistrictMap) {
+                let option = document.createElement("option");
+                option.value = state;
+                option.textContent = state;
+                stateDropdown.appendChild(option);
+            }
+        }
+
+        function loadDistricts() {
+            districtDropdown.innerHTML = '<option value="">Select District</option>';
+            let selectedState = stateDropdown.value;
+            if (selectedState) {
+                stateDistrictMap[selectedState].forEach(district => {
+                    let option = document.createElement("option");
+                    option.value = district;
+                    option.textContent = district;
+                    districtDropdown.appendChild(option);
+                });
+            }
+        }
+
+        function searchBloodStock() {
+            const state = document.getElementById("state").value;
+            const district = document.getElementById("district").value;
+            const bloodGroup = document.getElementById("bloodGroup").value;
+
+            if (!state || !district) {
+                alert("Please select both state and district");
+                return;
+            }
+
+            // Simulated data - in a real application, this would come from a backend
+            const mockData = [
+                { bloodGroup: "A+", availability: "High", lastUpdated: "2 hours ago", location: district },
+                { bloodGroup: "B+", availability: "Medium", lastUpdated: "1 hour ago", location: district },
+                { bloodGroup: "O+", availability: "Low", lastUpdated: "30 minutes ago", location: district }
+            ];
+
+            const filteredData = bloodGroup ? mockData.filter(item => item.bloodGroup === bloodGroup) : mockData;
+
+            const tbody = document.getElementById("resultsTable");
+            tbody.innerHTML = "";
+
+            if (filteredData.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align: center;">No data available</td></tr>';
+                return;
+            }
+
+            filteredData.forEach(item => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${item.bloodGroup}</td>
+                        <td>${item.availability}</td>
+                        <td>${item.lastUpdated}</td>
+                        <td>${item.location}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        // Initialize states on page load
+        loadStates();
+    </script>
+</body>
+</html>

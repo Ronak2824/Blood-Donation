@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="adminApp">
+<head>
+    <title>Admin Dashboard - BloodBridge</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        header {
+            background-color: #d9534f;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .logo {
+            position: absolute;
+            left: 20px;
+            top: 10px;
+            width: 120px;
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            margin-top: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+        .stat-box {
+            background: #ffdddd;
+            padding: 20px;
+            border-radius: 10px;
+            width: 30%;
+            font-size: 20px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .charts-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+        canvas {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .donation-requests, .top-donors {
+            margin-top: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background: #d9534f;
+            color: white;
+        }
+    </style>
+</head>
+<body ng-controller="AdminController">
+    <header>
+        <a href="home.html">
+            <img src="logo.png" alt="BloodBridge Logo" class="logo">
+        </a>
+        <h1>Admin Dashboard</h1>
+    </header>
+    
+    <div class="container">
+        <h2 style="color: #d9534f;">Website Overview</h2>
+        <div class="stats">
+            <div class="stat-box">👥 Total Donors: <strong>{{ totalDonors }}</strong></div>
+            <div class="stat-box">🩸 Total Donations: <strong>{{ totalDonations }}</strong></div>
+            <div class="stat-box">📅 Active Requests: <strong>{{ activeRequests }}</strong></div>
+        </div>
+
+        <div class="charts-container">
+            <canvas id="donationChart" width="400" height="200"></canvas>
+            <canvas id="usersChart" width="400" height="200"></canvas>
+        </div>
+    </div>
+
+    <script>
+        var app = angular.module('adminApp', []);
+        app.controller('AdminController', function($scope) {
+            $scope.totalDonors = 500;
+            $scope.totalDonations = 1200;
+            $scope.activeRequests = 23;
+        });
+
+        function renderCharts() {
+            var ctx

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>BloodBridge</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #d9534f;
+            --primary-dark: #c9302c;
+            --secondary-color: #f8f9fa;
+            --text-color: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: var(--secondary-color);
+        }
+
+        header {
+            background-color: rgba(217, 83, 79, 0.95);
+            color: white;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .logo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .button.primary {
+            background-color: var(--primary-color);
+        }
+
+        .button.primary:hover {
+            background-color: white;
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .button.secondary {
+            background-color: transparent;
+            border: 2px solid white;
+        }
+
+        .button.secondary:hover {
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1615461066841-6116e61058f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 1rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        .statistics {
+            padding: 4rem 1rem;
+            background: white;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .stat {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            flex: 1;
+            min-width: 250px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .stat h3 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-countdown {
+            background: linear-gradient(135deg, #ff6b6b, #d9534f);
+            color: white;
+            padding: 4rem 1rem;
+            text-align: center;
+        }
+
+        #countdown {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .countdown-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            min-width: 120px;
+        }
+
+        .countdown-item span {
+            display: block;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .faq {
+            padding: 4rem 1rem;
+            background: white;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 1rem;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item:hover {
+            transform: translateX(10px);
+        }
+
+        .testimonials {
+            padding: 4rem 1rem;
+            background: var(--secondary-color);
+        }
+
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .testimonial img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        .emergency-section {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1612277795421-9bc7706a4a34?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 1rem;
+            text-align: center;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-buttons {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            #countdown {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo-container">
+                <a href="NEW HOME.html">
+                    <img src="logo.png" alt="BloodBridge Logo" class="logo">
+                </a>
+            </div>
+            <div class="nav-buttons">
+                <a href="registration.html" class="button secondary">Register</a>
+                <a href="contact.html" class="button secondary">Contact Us</a>
+                <a href="AboutUS.html" class="button secondary">About Us</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Save Lives Through Blood Donation</h1>
+            <p>Your donation can save up to three lives. Join our mission to make a difference in someone's life today.</p>
+            <a href="avail.html" class="button primary">Looking for Blood</a>
+            <a href="wanttodonatepage.html" class="button secondary">Want to Donate Blood</a>
+        </div>
+    </section>
+
+    <section class="statistics">
+        <div class="stats-container">
+            <div class="stat">
+                <i class="fas fa-heart"></i>
+                <h3>2000+</h3>
+                <p>Lives Saved</p>
+            </div>
+            <div class="stat">
+                <i class="fas fa-hospital"></i>
+                <h3>50+</h3>
+                <p>Donation Centers</p>
+            </div>
+            <div class="stat">
+                <i class="fas fa-users"></i>
+                <h3>300+</h3>
+                <p>Volunteers</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-countdown">
+        <h2>Next Blood Donation Drive</h2>
+        <div id="countdown">
+            <div class="countdown-item">
+                00
+                <span>Days</span>
+            </div>
+            <div class="countdown-item">
+                00
+                <span>Hours</span>
+            </div>
+            <div class="countdown-item">
+                00
+                <span>Minutes</span>
+            </div>
+            <div class="countdown-item">
+                00
+                <span>Seconds</span>
+            </div>
+        </div>
+        <a href="blooddonationcamp.html" class="button secondary">Find a Donation Camp</a>
+    </section>
+
+    <section class="testimonials">
+        <h2>What Our Donors Say</h2>
+        <div class="testimonials-container">
+            <div class="testimonial">
+                <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Donor">
+                <h3>John Doe</h3>
+                <p>"Donating blood was a wonderful experience. The staff was professional and caring. It feels great to know I helped save lives."</p>
+            </div>
+            <div class="testimonial">
+                <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Donor">
+                <h3>Jane Smith</h3>
+                <p>"I donate blood regularly because I know how important it is. The process is quick and easy, and the impact is immeasurable."</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq">
+        <div class="faq-container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>Who can donate blood?</h3>
+                <p>Generally, people between the ages of 18 and 65 who are in good health and weigh at least 50kg can donate blood.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How often can I donate blood?</h3>
+                <p>You can donate whole blood once every 56 days. Other types of blood donations may vary.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What happens to my blood after donation?</h3>
+                <p>Your donated blood is tested, processed, and separated into components for patients in need.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="emergency-section">
+        <h2>Emergency Blood Request</h2>
+        <p>Need blood urgently? We're here to help. Fill out our emergency contact form and we'll connect you with donors.</p>
+        <a href="avail.html" class="button primary">Request Emergency Blood</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 BloodBridge Organization. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const targetDate = new Date("2025-12-31T00:00:00").getTime();
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML = `
+                <div class="countdown-item">${days}<span>Days</span></div>
+                <div class="countdown-item">${hours}<span>Hours</span></div>
+                <div class="countdown-item">${minutes}<span>Minutes</span></div>
+                <div class="countdown-item">${seconds}<span>Seconds</span></div>
+            `;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Header Scroll Effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(217, 83, 79, 0.98)';
+                header.style.padding = '0.5rem 1rem';
+            } else {
+                header.style.background = 'rgba(217, 83, 79, 0.95)';
+                header.style.padding = '1rem';
+            }
+        });
+    </script>
+</body>
+</html>

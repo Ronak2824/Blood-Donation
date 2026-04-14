@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Donor Login - BloodBridge</title>
+  <style>
+    :root {
+      --primary-color: #d9534f;
+      --primary-dark: #c9302c;
+      --secondary-color: #5cb85c;
+      --text-color: #333;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      background-image: url('https://images.unsplash.com/photo-1536856136534-bb679c52a9aa');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(217, 83, 79, 0.95), rgba(201, 48, 44, 0.95));
+      z-index: 1;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 2.5rem;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 450px;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      animation: slideUp 0.5s ease;
+    }
+
+    h2 {
+      color: var(--primary-color);
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .btn {
+      background-color: var(--primary-color);
+      color: #fff;
+      padding: 0.8rem;
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .error-message {
+      color: red;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Donor Login</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="donorId">Donor ID</label>
+        <input type="text" id="donorId" placeholder="Enter your Donor ID" required>
+      </div>
+      <div class="form-group">
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob" required>
+      </div>
+      <button type="submit" class="btn">Login</button>
+      <div class="error-message" id="loginError">Invalid credentials. Please try again.</div>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const donorId = document.getElementById("donorId").value.trim();
+      const dob = document.getElementById("dob").value;
+      const errorDiv = document.getElementById("loginError");
+
+      try {
+        const response = await fetch("/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ donorId, dob })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          alert("Login Successful!");
+          window.location.href = "/profile.html"; // Redirect or display profile
+        } else {
+          errorDiv.style.display = "block";
+        }
+      } catch (err) {
+        console.error("Error during login:", err);
+        errorDiv.textContent = "Server error. Try again later.";
+        errorDiv.style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>

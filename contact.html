@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Contact Us - BloodBridge</title>
+    <style>
+        :root {
+            --primary-color: #d9534f;
+            --primary-dark: #c9302c;
+            --text-color: #333;
+            --light-bg: rgba(255, 255, 255, 0.95);
+            --accent-color: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f5f5f5;
+        }
+
+        .logo-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .logo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        .header {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .nav {
+            background-color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .contact-section {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-box {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-box h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .contact-box p {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-box i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .map-container {
+            margin-top: 2rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+        }
+
+        .contact-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .nav {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .nav a {
+                display: block;
+                margin: 0;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="logo-container">
+        <a href="NEW HOME.html">
+            <img src="logo.png" alt="BloodBridge Logo" class="logo">
+        </a>
+    </div>
+
+    <div class="header">
+        <h1>Contact Us</h1>
+        <p>State Blood Transfusion Council, Uttar Pradesh</p>
+    </div>
+
+    <div class="nav">
+        <a href="NEW HOME.html">Home</a>
+        <a href="blooddonationcamp.html">Blood Center</a>
+        <a href="gallery.html">Gallery</a>
+    </div>
+
+    <div class="contact-section">
+        <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Medical Facility" class="contact-image">
+        
+        <div class="contact-grid">
+            <div class="contact-box">
+                <h3><i class="fas fa-map-marker-alt"></i> Our Location</h3>
+                <p>7th Floor, Mandi Parishad Bhawan</p>
+                <p>16, A.P. Sen Road, Charbagh</p>
+                <p>Lucknow, Uttar Pradesh - 226001</p>
+            </div>
+
+            <div class="contact-box">
+                <h3><i class="fas fa-phone"></i> Contact Information</h3>
+                <p><i class="fas fa-phone"></i> Phone: 0522-2638898</p>
+                <p><i class="fas fa-envelope"></i> Email: bsupsacs@gmail.com</p>
+                <p><i class="fas fa-clock"></i> Working Hours: 9:00 AM - 5:00 PM</p>
+            </div>
+
+            <div class="contact-box">
+                <h3><i class="fas fa-info-circle"></i> Additional Information</h3>
+                <p><i class="fas fa-ambulance"></i> Emergency Helpline: 1800-XXX-XXXX</p>
+                <p><i class="fas fa-calendar-alt"></i> Working Days: Monday - Saturday</p>
+                <p><i class="fas fa-wheelchair"></i> Wheelchair Accessible: Yes</p>
+            </div>
+        </div>
+
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3568.7531414412176!2d80.9167!3d26.8467!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDUwJzQ4LjEiTiA4MMKwNTUnMDAuMSJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
+
+    <div class="footer">
+        Copyright 2025 - SBTC UP. All Rights Reserved.
+    </div>
+</body>
+</html>
+

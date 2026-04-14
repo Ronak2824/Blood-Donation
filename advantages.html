@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Advantages of Blood Donation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+        header {
+            background-color: #d9534f;
+            color: white;
+            padding: 10px 0;
+            position: relative;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        .main-content {
+            padding: 20px;
+            background-color: white;
+            margin: 20px 0;
+            display: inline-block;
+        }
+        footer {
+            background-color: #d9534f;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #d9534f;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #c9302c;
+        }
+        .advantage {
+            background-color: #fff;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .advantage h2 {
+            color: #d9534f;
+        }
+        .advantage ul {
+            text-align: left;
+            list-style-type: square;
+            padding: 10px;
+            margin-left: 20px;
+        }
+        .advantage ul li {
+            margin-bottom: 10px;
+        }
+        .logo-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        .logo {
+            width: 100px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="NEW HOME.html">
+                <img src="logo.png" alt="BloodBridge Logo" class="logo">
+            </a>
+        </div>
+        <div class="container">
+            <h1>Advantages of Blood Donation</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-content">
+            <h2>Why Donating Blood is Important</h2>
+            <p>Blood donation not only saves lives but also benefits your own health. Discover the many advantages of giving blood and how it makes a significant impact on your well-being and the community.</p>
+            <a href="registration.html" class="button">Register to Donate</a>
+            <a href="contact.html" class="button">Contact Us</a>
+        </div>
+
+        <!-- Advantages Section -->
+        <div class="advantage">
+            <h2>Health Benefits for Donors</h2>
+            <ul>
+                <li><strong>Reduces the Risk of Heart Disease:</strong> Regular blood donation can help reduce the risk of heart disease by lowering iron levels in the blood.</li>
+                <li><strong>Improves Blood Flow:</strong> Blood donation stimulates the production of new blood cells, which improves circulation and helps keep your blood healthy.</li>
+                <li><strong>Burns Calories:</strong> Donating blood helps burn approximately 650 calories per donation, which can support weight management.</li>
+                <li><strong>Boosts Your Mental Health:</strong> The act of donating blood boosts your sense of accomplishment and gives a sense of helping others, leading to improved mental well-being.</li>
+                <li><strong>Promotes New Blood Cell Production:</strong> Donating blood encourages the body to produce new, healthy blood cells, which helps maintain overall health.</li>
+            </ul>
+        </div>
+
+        <!-- Call to Action Section -->
+        <div class="cta-countdown">
+            <p>Next Blood Donation Drive starts in:</p>
+            <p id="countdown"></p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Blood Donation Organization. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Countdown Timer Script
+        var countDownDate = new Date("March 15, 2025 09:00:00").getTime();
+
+        var x = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = countDownDate - now;
+
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = "The event has started!";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
